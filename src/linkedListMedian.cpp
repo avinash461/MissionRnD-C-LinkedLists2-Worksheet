@@ -20,5 +20,34 @@ struct node {
 };
 
 int linkedListMedian(struct node *head) {
+	struct node *current = head;
+	int len = 1;
+	if (head)
+	{
+		//using fast slow pointer strategy of mergesort...to find out the middle elemnt
+		struct node *fast_ptr;
+		struct node *slow_ptr;
+		fast_ptr = current->next;
+		slow_ptr = current;
+		while (fast_ptr != NULL)
+		{
+			fast_ptr = fast_ptr->next;
+			len++;
+			if (fast_ptr!= NULL)
+			{
+				slow_ptr = slow_ptr->next;
+				fast_ptr = fast_ptr->next;
+				len++;
+			}
+		}
+		if (len % 2 == 0)
+		{
+			return ((slow_ptr->num) + (slow_ptr->next->num)) / 2;
+		}
+		else
+		{
+			return slow_ptr->num;
+		}
+	}
 	return -1;
 }
